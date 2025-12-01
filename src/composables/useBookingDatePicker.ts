@@ -1,4 +1,4 @@
-import { computed, ref, type Ref, type ComputedRef } from 'vue'
+import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
 import isBetween from 'dayjs/plugin/isBetween'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
@@ -14,8 +14,7 @@ export function useBookingDatePicker(options: UseBookingDatePickerOptions) {
     onCheckOutChange,
     onValidationError,
     minDate,
-    dateFormat = 'YYYY-MM-DD',
-    displayFormat = 'dd/MM/yyyy'
+    dateFormat = 'YYYY-MM-DD'
   } = options
 
   // Convert bookedDates to a ref if it's a function

@@ -1,4 +1,7 @@
-@tailwind base;
+/* Import vue-datepicker styles so consumers only need one import */
+@import '@vuepic/vue-datepicker/dist/main.css';
+
+/* Note: @tailwind base is intentionally excluded to avoid CSS reset conflicts with consuming apps */
 @tailwind components;
 @tailwind utilities;
 
