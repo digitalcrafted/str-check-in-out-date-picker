@@ -1,0 +1,16 @@
+node_modules
+dist
+src
+*.log
+.DS_Store
+.env
+.env.local
+.vscode
+.idea
+*.tsbuildinfo
+tsconfig.json
+vite.config.ts
+tailwind.config.js
+postcss.config.js
+README.md
+
