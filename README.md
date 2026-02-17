@@ -13,21 +13,34 @@ npm install @digitalcrafted/str-check-in-out-date-picker
 - Vue 3.x
 - Tailwind CSS configured in your project
 
+## Booked dates format
+
+The `bookedDates` prop expects an array of `{ start, end }` in **YYYY-MM-DD** format:
+
+- **start**: Check-in date of the existing booking.
+- **end**: Last night of stay (check-out date minus 1). Actual checkout day = `end + 1`.
+
+This matches the common backend convention (e.g. `GET /properties/:id/booked-dates`). The package uses **UTC** for all date comparisons to avoid timezone shifts and stay aligned with backend overlap logic.
+
 ## Setup
 
-### Import CSS
+### CSS Import (Optional)
 
-Import the package CSS in your main entry file:
+**If your app already has Tailwind CSS configured**, you typically don't need to import the package CSS - the utility classes will work with your existing Tailwind setup.
+
+**If your app doesn't have Tailwind CSS**, you can optionally import the package CSS:
 
 ```typescript
-import '@digitalcrafted/str-check-in-out-date-picker/dist/style.css'
+import '@digitalcrafted/str-check-in-out-date-picker/style.css'
 ```
 
-Or add it to your main CSS file if you're using Tailwind:
+Or add it to your main CSS file:
 
 ```css
-@import '@digitalcrafted/str-check-in-out-date-picker/dist/style.css';
+@import '@digitalcrafted/str-check-in-out-date-picker/style.css';
 ```
+
+**Note**: The CSS is NOT automatically imported to avoid conflicts with your app's existing styles. You must import it explicitly if needed.
 
 ## Usage
 
@@ -161,6 +174,20 @@ const {
 })
 </script>
 ```
+
+## Usage in mini-sites
+
+Use the package on booking mini-sites (e.g. property-specific sites) with the same business rules as the main STR booking form:
+
+1. **Fetch booked dates** from your API (e.g. `GET /properties/:propertyId/booked-dates`) and pass the response array to the `bookedDates` prop. The API should return `{ start, end }[]` with `end` = last night of stay (check-out date minus 1).
+
+2. **Use the component or composable**:
+   - **Simple**: Use `<BookingDateRange :booked-dates="bookedDates" @check-in-change="..." @check-out-change="..." @validation-error="..." />` for a ready-made layout.
+   - **Custom layout**: Use `useBookingDatePicker({ bookedDates, onCheckInChange, onCheckOutChange, onValidationError })` and render your own grid and VueDatePicker wrappers (e.g. to match str-frontend-style labels and styling).
+
+3. **Optional**: If your app does not use Tailwind CSS, import the package styles: `import '@digitalcrafted/str-check-in-out-date-picker/style.css'`.
+
+4. **Output**: Callbacks receive date strings in **YYYY-MM-DD**. Display format (e.g. dd/MM/yyyy) is configurable via the component props.
 
 ## API Reference
 

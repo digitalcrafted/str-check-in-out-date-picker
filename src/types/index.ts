@@ -1,3 +1,9 @@
+/**
+ * A booked date range from the API.
+ * - start: check-in date of the existing booking (YYYY-MM-DD).
+ * - end: last night of stay (check-out date minus 1). Actual checkout day = end + 1.
+ * The package uses UTC for all range comparisons to match backend behavior.
+ */
 export interface BookedDateRange {
   start: string | Date
   end: string | Date

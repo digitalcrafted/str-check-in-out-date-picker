@@ -25,7 +25,9 @@ export default defineConfig({
         }
       }
     },
-    cssCodeSplit: false
+    cssCodeSplit: false,
+    // Extract CSS to separate file, don't inject it automatically
+    cssMinify: true
   },
   css: {
     postcss: './postcss.config.js'

@@ -32,7 +32,7 @@ const handleUpdate = (value: Date | null) => {
     :disabled-dates="disabledDates"
     :formats="{ input: 'dd/MM/yyyy' }"
     :time-config="{ enableTimePicker: false }"
-    prevent-min-max-navigation
+    :prevent-min-max-navigation="minDate !== undefined"
     auto-apply
     :placeholder="placeholder"
     :input-class-name="inputClass"
